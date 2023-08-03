@@ -6,7 +6,7 @@ namespace Basilisk.Web.Controllers
 {
     public class ProductController : BaseController
     {
-      
+      //test
 
         [HttpGet]
         public IActionResult Index(int page = 1, string prodName = "", string supName = "", string catName = "")
