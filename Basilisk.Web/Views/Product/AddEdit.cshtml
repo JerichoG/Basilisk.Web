@@ -1,0 +1,51 @@
+﻿@using Basilisk.ViewModel.Product
+@model UpsertViewModel
+@{
+    ViewData["Title"] = "Product Add - Edit";
+
+}
+
+<form method="POST" asp-action="Save" class="Save">
+
+    <input asp-for="Id" readonly />
+
+    <div class="field-row">
+        <label>Product</label>
+        <input placeholder="Name" asp-for="Name" />
+    </div>
+    
+    <div class="field-row">
+        <label>Supplier</label>
+        <select asp-for="SupplierId" asp-items="@(new SelectList(Model.DropdownSupplierCustom, "LongValue", "StringValue"))">
+            <option selected>-- Select Supplier Custom--</option>
+        </select>
+    </div>
+    <div class="field-row">
+        <label>Category</label>
+        <select asp-for="CategoryId" asp-items="@Model.DropdownCategory">
+            <option selected>-- Select Category --</option>
+        </select>
+    </div>
+    <div class="field-row">
+        <label>Description</label>
+        <textarea placeholder="Description" asp-for="Description"> </textarea>
+    </div>    <div class="field-row">
+        <label>Price</label>
+        <input placeholder="Price" asp-for="Price" />
+    </div>
+    <div class="field-row">
+        <label>Stock</label>
+        <input placeholder="Stock" asp-for="Stock" />
+    </div>
+    <div class="field-row">
+        <label>OnOrder</label>
+        <input placeholder="OnOrder" asp-for="OnOrder" />
+    </div>
+    <div class="field-row">
+        <label>Discontinue</label>
+        <input type="checkbox" placeholder="Discontinue" />
+    </div>
+
+
+    <button type="submit" class="btn">Save</button>
+</form>

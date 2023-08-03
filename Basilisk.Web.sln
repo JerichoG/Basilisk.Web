@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Web", "Basilisk.Web\Basilisk.Web.csproj", "{D66F834A-F17C-4175-9009-8BE87A485822}"
+	ProjectSection(ProjectDependencies) = postProject
+		{36E36C5B-F0D3-4807-BCB0-91322E59AA70} = {36E36C5B-F0D3-4807-BCB0-91322E59AA70}
+		{A2509F86-89C9-4829-8F82-23CCDD0601D9} = {A2509F86-89C9-4829-8F82-23CCDD0601D9}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.DataAccess", "Basilisk.DataAccess\Basilisk.DataAccess.csproj", "{749EC07A-5EAA-4063-8D1A-6EEA91F287CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.ViewModel", "Basilisk.ViewModel\Basilisk.ViewModel.csproj", "{36E36C5B-F0D3-4807-BCB0-91322E59AA70}"
+	ProjectSection(ProjectDependencies) = postProject
+		{749EC07A-5EAA-4063-8D1A-6EEA91F287CC} = {749EC07A-5EAA-4063-8D1A-6EEA91F287CC}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Provider", "Basilisk.Provider\Basilisk.Provider.csproj", "{A2509F86-89C9-4829-8F82-23CCDD0601D9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{36E36C5B-F0D3-4807-BCB0-91322E59AA70} = {36E36C5B-F0D3-4807-BCB0-91322E59AA70}
+		{749EC07A-5EAA-4063-8D1A-6EEA91F287CC} = {749EC07A-5EAA-4063-8D1A-6EEA91F287CC}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Repository", "Basilisk.Repository\Basilisk.Repository.csproj", "{32013873-C445-4474-A4EB-5F0EB1C11186}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Utility", "Basilisk.Utility\Basilisk.Utility.csproj", "{C2491E88-F9D4-4D17-B701-4FF6D536CE4F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{36E36C5B-F0D3-4807-BCB0-91322E59AA70} = {36E36C5B-F0D3-4807-BCB0-91322E59AA70}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Api", "Basilisk.Api\Basilisk.Api.csproj", "{FF056A40-1214-4FFA-96A6-595CB14BFED7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D66F834A-F17C-4175-9009-8BE87A485822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D66F834A-F17C-4175-9009-8BE87A485822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D66F834A-F17C-4175-9009-8BE87A485822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D66F834A-F17C-4175-9009-8BE87A485822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{749EC07A-5EAA-4063-8D1A-6EEA91F287CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{749EC07A-5EAA-4063-8D1A-6EEA91F287CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{749EC07A-5EAA-4063-8D1A-6EEA91F287CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{749EC07A-5EAA-4063-8D1A-6EEA91F287CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36E36C5B-F0D3-4807-BCB0-91322E59AA70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36E36C5B-F0D3-4807-BCB0-91322E59AA70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36E36C5B-F0D3-4807-BCB0-91322E59AA70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36E36C5B-F0D3-4807-BCB0-91322E59AA70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2509F86-89C9-4829-8F82-23CCDD0601D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2509F86-89C9-4829-8F82-23CCDD0601D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2509F86-89C9-4829-8F82-23CCDD0601D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2509F86-89C9-4829-8F82-23CCDD0601D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32013873-C445-4474-A4EB-5F0EB1C11186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32013873-C445-4474-A4EB-5F0EB1C11186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32013873-C445-4474-A4EB-5F0EB1C11186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32013873-C445-4474-A4EB-5F0EB1C11186}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2491E88-F9D4-4D17-B701-4FF6D536CE4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2491E88-F9D4-4D17-B701-4FF6D536CE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2491E88-F9D4-4D17-B701-4FF6D536CE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2491E88-F9D4-4D17-B701-4FF6D536CE4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF056A40-1214-4FFA-96A6-595CB14BFED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF056A40-1214-4FFA-96A6-595CB14BFED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF056A40-1214-4FFA-96A6-595CB14BFED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF056A40-1214-4FFA-96A6-595CB14BFED7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {178B8C3E-4584-4E6F-9795-120E853EB26A}
+	EndGlobalSection
+EndGlobal

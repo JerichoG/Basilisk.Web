@@ -1,0 +1,65 @@
+﻿@using Basilisk.ViewModel.Customer
+@model IndexCustomerViewModel
+@{
+    ViewData["Title"] = "Customer Index";
+
+}
+
+<h1>Total data di table Customer By ViewBag : @Model.TotalData </h1>
+
+<form method="GET" asp-controller="Customer" asp-action="Index">
+    <div class="field-row">
+        <label for="Name">Customer</label>
+        <input type="text" name="searchCust" id="searchCust" value="@Model.SearchCustomer" />
+    </div>
+    <button type="submit" class="btn">SEARCH</button>
+
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>TotalProduct</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Customers)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-detail" asp-controller="Customer" asp-action="DetailCart" asp-route-id="@item.Id"><i class="fa fa-cart-plus"><span>Cart Detail</span></i></a>
+                </td>
+                <td>@item.Id</td>
+                <td>@item.CustomerName</td>
+                <td>@item.Address</td>
+                <td>@item.City</td>
+                <td>@item.Phone</td>
+                <td>@item.TotalProduct</td>
+
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="10">
+                <div>
+                    @for (int i = 1; i <= Model.TotalHalaman; i++)
+                    {
+
+                        <a class="btn" asp-action="Index" asp-route-page="@i"
+                        asp-route-searchCust="@Model.SearchCustomer">@i</a>
+
+                    }
+                </div>
+
+            </td>
+
+        </tr>
+    </tfoot>
+</table>

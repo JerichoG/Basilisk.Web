@@ -1,0 +1,87 @@
+﻿<link rel="stylesheet" href="~/css/popup.css" asp-append-version="true" />
+
+
+    <div class="popup-dialog detail-dialog">
+        <header>
+            <h1 style="color:white">Detail Supplier</h1>
+            <a class="close-button" href="javascript">
+               <i class="fa fa-close"></i>
+            </a>
+        </header>
+
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Stock</th>
+                    <th>On Order</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody class="detail-product">
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+
+<script>
+
+    $(".close-button").click(function (event) {
+        event.preventDefault();
+        $(".modal-layer").css("display", "none");
+        $(".detail-dialog").css("display", "none");
+        location.reload();
+    });
+
+    $(".btn-detail-modal").click(function(event){
+        event.preventDefault();
+        $(".modal-layer").css("display", "flex");
+        $(".detail-dialog").css("display", "block");
+
+
+        let valueUrl = $(this).attr("href");
+        $.ajax({
+            url : valueUrl,
+            success: function(result){
+                
+                
+
+                var tbodyTarget = document.querySelector("table .detail-product");
+              
+
+                result.gridProd.forEach(function (data){
+                    var stringTr = `<tr>
+                                        <td>${data.productName}</td>
+                                        <td>${data.categoryName}</td>
+                                        <td>${data.description}</td>
+                                        <td>${data.stock}</td>
+                                        <td>${data.onOrder}</td>
+                                        <td>${data.price}</td>
+                                        <td>${data.discontinue}</td>
+                                    </tr>`;
+                    tbodyTarget.insertAdjacentHTML("afterEnd", stringTr);
+
+                });
+                
+            },
+            fail : function(){console.log("Fail")},
+            error: function(){console.log("Internal Server Error")}
+        });
+
+    });
+
+  
+
+</script>

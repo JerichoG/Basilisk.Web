@@ -1,0 +1,39 @@
+﻿@using Basilisk.ViewModel.Supplier
+@model AddEditSupplierViewModel
+@{
+    ViewData["Title"] = "Supplier Add - Edit";
+
+}
+
+<form method="POST" asp-action="Save" class="Save">
+
+    <input asp-for="Id"/>
+
+    <div class="field-row">
+        <label>Company</label>
+        <input placeholder="CompanyName" asp-for="CompanyName" />
+    </div>
+    <div class="field-row">
+        <label>Contact</label>
+        <input placeholder="ContactPerson" asp-for="ContactPerson" />
+    </div>    <div class="field-row">
+        <label>Job Title</label>
+        <input placeholder="JobTitle" asp-for="JobTitle" />
+    </div>
+    <div class="field-row">
+        <label>Address</label>
+        <input placeholder="Address" asp-for="Address" />
+    </div>    <div class="field-row">
+        <label>City</label>
+        <input placeholder="City" asp-for="City" />
+    </div>    <div class="field-row">
+        <label>Phone</label>
+        <input placeholder="Phone" asp-for="Phone" />
+    </div>
+    <div class="field-row">
+        <label>Email</label>
+        <input placeholder="Email" asp-for="Email" />
+    </div>
+
+    <button type="submit" class="btn">Save</button>
+</form>

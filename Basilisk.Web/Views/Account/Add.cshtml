@@ -1,0 +1,28 @@
+﻿@using Basilisk.ViewModel.Account
+@model UpsertAccountViewModel
+@{
+    ViewData["Title"] = "Account Add";
+
+}
+
+
+<form method="POST" asp-action="Add" class="Save">
+
+    <div class="field-row">
+        <label asp-for="Username"></label>
+        <input placeholder="UserName" asp-for="Username" />
+        <span asp-validation-for="Username"></span>
+    </div>
+    <div class="field-row">
+        <label asp-for="Password"></label>
+        <input type = "password" placeholder="Password" asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div class="field-row">
+        <label>Role</label>
+        <select asp-for="Role" asp-items="@(new SelectList(Model.Roles, "StringValue", "StringValue"))">
+            <option selected>-- Select Role --</option>
+        </select>
+    </div>
+    <button type="submit" class="btn">Save</button>
+</form>

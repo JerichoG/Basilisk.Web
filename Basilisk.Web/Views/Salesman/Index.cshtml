@@ -1,0 +1,76 @@
+﻿@using Basilisk.ViewModel.Salesman
+@model IndexSalesmanViewModel
+@{
+    ViewData["Title"] = "Salesman Index";
+
+}
+
+<h1>Total data di table Salesman :@Model.TotalData  </h1>
+
+<form method="GET" asp-controller="Salesman" asp-action="Index">
+    <div class="field-row">
+        <label for="Name">ID</label>
+        <input type="text" name="searchID" id="searchID" value="@Model.SearchID" />
+    </div>
+    <button type="submit" class="btn">SEARCH</button>
+
+</form>
+
+<a class="btn" id="addBtn" asp-controller="Salesman" asp-action="Add">ADD</a>
+
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Level</th>
+            <th>BirthDate</th>
+            <th>HireDate</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>Superior</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Salesmen)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-update" asp-controller="Salesman" asp-action="Edit" asp-route-id="@item.EmployeeNumber"><i class="fa fa-pencil"><span>Edit</span></i></a>
+                    <a class="btn btn-delete" asp-controller="Salesman" asp-action="Delete" asp-route-id="@item.EmployeeNumber"><i class="fa fa-trash"><span>Hapus</span></i></a>
+                    <a class="btn btn-detail" asp-controller="Salesman" asp-action="Details" asp-route-id="@item.EmployeeNumber"><i class="fa fa-trash"><span>Detail</span></i></a>
+                </td>
+                <td>@item.EmployeeNumber</td>
+                <td>@item.FirstName @item.LastName</td>
+                <td>@item.Level</td>
+                <td>@item.BirthDate</td>
+                <td>@item.HireDate</td>
+                <td>@item.Address</td>
+                <td>@item.City</td>
+                <td>@item.Phone</td>
+                <td>@item.SuperiorEmployee</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="10">
+                <div>
+                    @for (int i = 1; i <= Model.TotalHalaman; i++)
+                    {
+
+                        <a class="btn" asp-action="Index" asp-route-page="@i"
+                        asp-route-idPage="@Model.SearchID">@i</a>
+
+                    }
+                </div>
+
+            </td>
+
+        </tr>
+    </tfoot>
+</table>

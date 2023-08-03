@@ -1,0 +1,30 @@
+﻿@using Basilisk.ViewModel.Customer
+@model IEnumerable<CatalogProductViewModel>
+@{
+    ViewData["Title"] = "Catalog Product";
+
+}
+
+<a class="btn" id="backBtn" asp-controller="Customer" asp-action="DetailCart" asp-route-id="@ViewBag.CustomerId">Back to Cart</a>
+
+
+<div class="row">
+    @foreach (var item in Model.ToList())
+    {
+        <div class="col-sm-3">
+            <div class="card" style="margin-bottom:10px; margin-top:10px; width:max-content; align-items: center">
+                <img src="~/84330567.jpg" class="card-img-top" alt="..." style="width: 200px;">
+                
+                    <input asp-for="@item.CustomerId" value="@item.CustomerId" style="display:none">
+                    <input asp-for="@item.ProductId"  value="@item.ProductId" style="display:none">
+                    <div class="card-body" style="width:min-content; display: grid;">
+                        <h5 class="card-title" style="font-size:17px">@item.ProductName</h5>
+                        <p class="card-text">@item.FormatedPrice</p>
+                    <a class="btn btn-checkout" asp-controller="Customer" asp-action="AddtoCart" asp-route-idCus="@item.CustomerId" asp-route-idProd="@item.ProductId"><i class="fa fa-cart-plus"></i></a>
+                    </div>
+                
+            </div>
+        </div>
+    }
+</div>
+

@@ -1,0 +1,128 @@
+﻿@using Basilisk.ViewModel.Customer
+@model CartViewModel
+@{
+    ViewData["Title"] = "Cart Detail";
+
+}
+
+<a class="btn" id="addBtn" asp-controller="Customer" asp-action="AddProduct" asp-route-idCus="@ViewBag.CustomerId">Add Product</a>
+
+<h1>Cart Detail dari Customer : @ViewBag.CustomerId</h1>
+
+<div style="display: flex; justify-content:space-between">
+    
+        <form asp-action="Checkout" asp-controller="Customer" method="POST">
+        @if (Model.CartDetails.Count != 0)
+        {
+            <div>
+
+                @for (int i = 0; i < Model.CartDetails.Count(); i++)
+                {
+                    <input asp-for="TotalPrice" hidden />
+                    <input asp-for="CustomerId" hidden />
+                    <input asp-for="@Model.CartDetails[i].Seller" hidden />
+
+                    <div class="cardCart">
+                        <div>
+                            <input type="checkbox" class="cc" asp-for="@Model.CartDetails[i].CheckedAll" />
+                            <a asp-action="CheckHandlerAll"
+                       asp-route-idSeller="@Model.CartDetails[i].SellerId"
+                       asp-route-idCus="@Model.CustomerId"
+                       asp-route-checkedAll="@Model.CartDetails[i].CheckedAll"></a>
+                            <label>seller: @Model.CartDetails[i].Seller</label>
+                            <hr />
+                        </div>
+                        @for (int j = 0; j < Model.CartDetails[i].Products.Count(); j++)
+                        {
+                            <input asp-for="CartDetails[i].Products[j].ProductId" hidden />
+                            <input asp-for="CartDetails[i].Products[j].Price" hidden />
+
+                            <div class="wrap-contentCart">
+                                <div style="display:flex">
+
+                                    <input type="checkbox" class="cc" asp-for="CartDetails[i].Products[j].Checked" />
+                                    <a asp-action="CheckHandler"
+                                       asp-route-idProd="@Model.CartDetails[i].Products[j].ProductId"
+                                       asp-route-idCus="@Model.CustomerId"
+                                       asp-route-check="@Model.CartDetails[i].Products[j].Checked"></a>
+
+                                    <img src="~/84330567.jpg" width="100px" />
+                                    <div style="display:flex; flex-direction:column">
+                                        <span>@Model.CartDetails[i].Products[j].ProductName</span>
+                                        <input asp-for="CartDetails[i].Products[j].ProductName" hidden />
+
+                                        <span>@Model.CartDetails[i].Products[j].FormatPrice</span>
+                                        <input asp-for="CartDetails[i].Products[j].FormatPrice" hidden />
+
+                                        <span asp-validation-for="@Model.CartDetails[i].Products[j].Quantity"></span>
+                                    </div>
+
+
+                                </div>
+                                <div>
+
+                                    <a class="btn-lingkaran" asp-action="DeleteProduct" asp-route-idProd="@Model.CartDetails[i].Products[j].ProductId" asp-route-idCus="@Model.CustomerId">
+                                        <i class="fa fa-trash"> </i>
+                                    </a>
+                                    <div class="wrap-btnPlusMin">
+
+                                        <a class="btn-lingkaran" asp-action="MinQuantity" asp-route-idProd="@Model.CartDetails[i].Products[j].ProductId" asp-route-idCus="@Model.CustomerId">
+                                            <i class="fa fa-minus-circle"> </i>
+                                        </a>
+
+                                        <input asp-for="CartDetails[i].Products[j].Quantity" hidden />
+                                        <span>@Model.CartDetails[i].Products[j].Quantity</span>
+
+
+                                        <a class="btn-lingkaran" asp-action="PlusQuantity"
+                                           asp-route-idProd="@Model.CartDetails[i].Products[j].ProductId"
+                                           asp-route-idCus="@Model.CustomerId">
+                                           <i class="fa fa-plus-circle"> </i>
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <hr />
+                            <br>
+                        }
+
+
+
+
+                    </div>
+
+                }
+
+
+
+
+            </div>
+            <div class="cardCart checkOut" style="align-self: flex-start;">
+                <span>Shopping Summary</span>
+                <div>
+                    <span>Total Price</span>
+                    <hr />
+                    <select>
+                        <option selected>-- Select Delivery --</option>
+                    </select>
+                    <hr />
+                    <span>@Model.FormatTotalPrice</span>
+                    <input asp-for="@Model.FormatTotalPrice" hidden />
+                    <hr />
+                </div>
+                <button class="btn btn-checkout" type="submit">CHECKOUT</button>
+            </div>
+        }
+        else
+        {
+            <h1>Data is Empty</h1>
+        }
+
+        </form>
+    
+    
+
+</div>

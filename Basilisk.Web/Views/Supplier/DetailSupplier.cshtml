@@ -1,0 +1,58 @@
+﻿@using Basilisk.ViewModel.Supplier
+@model DetailSupplierViewModel
+@{
+    ViewData["Title"] = "Supplier Detail";
+
+}
+
+<h1> Detail dari Supplier @Model.CompanyName</h1>
+
+<div class="field-col">
+    <h5>Company : @Model.CompanyName</h5>
+    <h5>Contact : @Model.ContactPerson</h5>
+    <h5>Job Title : @Model.JobTitle</h5>
+    <h5>Address : @Model.Address</h5>
+    <h5>City : @Model.City</h5>
+    <h5>Phone : @Model.Phone</h5>
+    <h5>Email : @Model.Email</h5>
+
+</div>
+
+
+
+<div class="field-col">
+
+    <h2> Product dari Supplier @Model.CompanyName</h2>
+    <table>
+
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Stock</th>
+                <th>On Order</th>
+                <th>Price</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var prod in Model.GridProd)
+            {
+                <tr>
+                    <td>@prod.ProductName</td>
+                    <td>@prod.CategoryName</td>
+                    <td>@prod.Description</td>
+                    <td>@prod.Stock</td>
+                    <td>@prod.OnOrder</td>
+                    <td>@prod.Price</td>
+                    <td>@prod.Discontinue</td>
+                </tr>
+            }
+        </tbody>
+        
+
+    </table>
+
+</div>

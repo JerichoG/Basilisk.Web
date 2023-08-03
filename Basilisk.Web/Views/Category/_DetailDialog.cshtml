@@ -1,0 +1,59 @@
+﻿<link rel="stylesheet" href="~/css/popup.css" asp-append-version="true" />
+
+
+    <div class="popup-dialog detail-dialog">
+        <header>
+            <h1 style="color:white">Detail Category</h1>
+            <a class="close-button" href="javascript">
+               <i class="fa fa-close"></i>
+            </a>
+        </header>
+
+
+        <form style="color: white; display:block">
+            <div  class="field-row">
+                <label>Name</label>
+                <div>
+                    <span class="detail-name"></span>
+                </div>
+            </div>
+            <div class="field-row">
+                <label>Description</label>
+                <div>
+                    <span class="detail-description"></span>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
+
+<script>
+
+    $(".close-button").click(function (event) {
+        event.preventDefault();
+        $(".modal-layer").css("display", "none");
+        $(".detail-dialog").css("display", "none");
+    });
+
+    $(".btn-detail-modal").click(function(event){
+        event.preventDefault();
+        let valueUrl = $(this).attr("href");
+        $.ajax({
+            url : valueUrl,
+            success: function(result){
+                $(".detail-name").html(result.categoryName);
+                $(".detail-description").html(result.description);
+            },
+            fail : function(){console.log("Fail")},
+            error: function(){console.log("Internal Server Error")}
+        });
+
+        $(".modal-layer").css("display", "flex");
+        $(".detail-dialog").css("display", "block");
+    });
+
+  
+
+</script>

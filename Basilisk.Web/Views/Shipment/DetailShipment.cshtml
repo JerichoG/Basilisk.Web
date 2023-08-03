@@ -1,0 +1,63 @@
+﻿@using Basilisk.ViewModel.Shipment
+@model DetailsShipmentViewModel
+@{
+    ViewData["Title"] = "Delivery Detail";
+
+}
+
+<h1>Shipment Info @Model.ShipName</h1>
+
+<div class="field-col">
+    <h5>Id : @Model.ShipId</h5>
+    <h5>Shipment Name: @Model.ShipName</h5>
+    <h5>Phone : @Model.Phone</h5>
+
+</div>
+
+<div class="field-col">
+    <h2>Delivery Information</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Invoice Number</th>
+                <th>Customer</th>
+                <th>Order Date</th>
+                <th>Ship Date</th>
+                <th>Due Date</th>
+                <th>Destination Address</th>
+                <th>Destination City</th>
+                <th>Destination Postal Code</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.Products){
+                <tr>
+                    <td>
+                        @if(item.ShippedDate == "N/A")
+                        {
+                            <a class="btn btn-update" asp-controller="Shipment" asp-action="Send" asp-route-invNum="@item.InvoiceNumber" asp-route-idShip="@Model.ShipId"><i class="fa fa-truck"><span>Send</span></i></a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-update disabled" asp-controller="Shipment" asp-action="Send" asp-route-invNum="@item.InvoiceNumber" asp-route-idShip="@Model.ShipId"><i class="fa fa-truck"><span>Send</span></i></a>
+                        }
+                        
+                    </td>
+                    <td>@item.InvoiceNumber</td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.OrderDate</td>
+                    <td>@item.ShippedDate</td>
+                    <td>@item.DueDate</td>
+                    <td>@item.DestinationAddress</td>
+                    <td>@item.DestinationCity</td>
+                    <td>@item.DestinationPostalCode</td>
+                    <td>@item.Cost</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</div>

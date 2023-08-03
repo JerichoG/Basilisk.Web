@@ -1,0 +1,88 @@
+﻿@using Basilisk.ViewModel.Product
+@model IndexProductViewModel
+@{
+    ViewData["Title"] = "Product Index";
+
+}
+
+<form method="GET" asp-controller="Product" asp-action="Index">
+    <div class="field-row">
+        <label for="prodName">Product</label>
+        <input type="text" name="prodName" id="prodName" value="@Model.ProdName" />
+
+
+    </div>
+    <div class="field-row">
+
+        <label for="supName">Supplier</label>
+        <input type="text" name="supName" id="supName" value="@Model.SupName" />
+    </div>
+    <div class="field-row">
+
+        <label for="catName">Category</label>
+        <input type="text" name="catName" id="catName" value="@Model.CatName" />
+    </div>
+
+    <button type="submit" class="btn">SEARCH</button>
+
+</form>
+
+<a class="btn" id="addBtn" asp-controller="Product" asp-action="Add">ADD</a>
+
+
+<h1>Total data di table Product :@Model.TotalData  </h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Supplier</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>OnOrder</th>
+            <th>Discontinue</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Grid)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-update" asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pencil"><span>Edit</span></i></a>
+                    <a class="btn btn-delete" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"><span>Hapus</span></i></a>
+                </td>
+                <td>@item.Id</td>
+                <td>@item.ProductName</td>
+                <td>@item.SupplierName</td>
+                <td>@item.CategoryName</td>
+                <td>@item.Description</td>
+                <td>@item.Price</td>
+                <td>@item.Stock</td>
+                <td>@item.OnOrder</td>
+                <td>@item.Discontinue</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="10">
+                <div>
+                    @for (int i = 1; i <= Model.TotalHalaman; i++)
+                    {
+
+                        <a class="btn" asp-action="Index" asp-route-page="@i" 
+                        asp-route-supName="@Model.SupName" asp-route-prodName="@Model.ProdName" 
+                        asp-route-catName="@Model.CatName">@i</a>
+
+                    }
+                </div>
+
+            </td>
+            
+        </tr>
+    </tfoot>
+</table>
