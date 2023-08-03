@@ -1,0 +1,95 @@
+﻿@using Basilisk.ViewModel.Supplier
+@model IndexSupplierViewModel
+@{
+    ViewData["Title"] = "Supplier Index";
+
+}
+
+@section modalDialog{
+    <div class="modal-layer">
+        <partial name="_DetailDialog"></partial>
+       @* <partial name="_UpsertDialog"></partial>
+        <partial name="_DeleteDialog"></partial>*@
+    </div>
+
+    <script>
+        $(".close-button").click(function () {
+            $(".modal-layer").removeAttr("style");
+            $(".popup-dialog").removeAttr("style");
+
+        });
+    </script>
+
+}
+
+<h1>Total data di table Supplier : @Model.TotalData </h1>
+
+<form method="GET" asp-controller="Supplier" asp-action="Index">
+    <div class="field-row">
+        <label for="Name">Name</label>
+        <input type="text" name="searchName" id="searchName" value="@Model.SearchName" />
+    </div>
+    <button type="submit" class="btn">SEARCH</button>
+
+</form>
+
+
+<a class="btn" id="addBtn" asp-controller="Supplier" asp-action="Add">ADD</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>ID</th>
+            <th>Company</th>
+            <th>Contact</th>
+            <th>Job Title</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Suppliers)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-update" asp-controller="Supplier" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pencil"><span>Edit</span></i></a>
+                    <a class="btn btn-delete" asp-controller="Supplier" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"><span>Hapus</span></i></a>
+                    <a class="btn btn-detail" asp-controller="Supplier" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-trash"><span>Detail</span></i></a>
+
+                    <a class="btn btn-update-modal" asp-controller="Supplier" asp-action="EditPopup" asp-route-id="@item.Id"><i class="fa fa-pencil"><span>Edit Popup</span></i></a>
+                    <a class="btn btn-delete-modal" asp-controller="Supplier" asp-action="DeleteModal" asp-route-id="@item.Id"><i class="fa fa-trash"><span>Delete Modal</span></i></a>
+                    <a class="btn btn-detail-modal" asp-controller="Supplier" asp-action="DetailPopup" asp-route-id="@item.Id"><i class="fa fa-info"><span>Detail Popup</span></i></a>
+
+                </td>
+                <td>@item.Id</td>
+                <td>@item.CompanyName</td>
+                <td>@item.ContactPerson</td>
+                <td>@item.JobTitle</td>
+                <td>@item.Address</td>
+                <td>@item.City</td>
+                <td>@item.Phone</td>
+                <td>@item.Email</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="10">
+                <div>
+                    @for (int i = 1; i <= Model.TotalHalaman; i++)
+                    {
+
+                        <a class="btn" asp-action="Index" asp-route-page="@i"
+                       asp-route-searchName="@Model.SearchName  ">@i</a>
+
+                    }
+                </div>
+
+            </td>
+
+        </tr>
+    </tfoot>
+</table>

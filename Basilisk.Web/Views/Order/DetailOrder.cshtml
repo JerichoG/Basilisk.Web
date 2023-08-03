@@ -1,0 +1,82 @@
+﻿@using Basilisk.ViewModel.Order
+@model DetailOrderViewModel
+@{
+    ViewData["Title"] = $"Order Detail {Model.InvoiceNumber}";
+}
+
+<h1>Transaction Info No. @Model.InvoiceNumber</h1>
+
+<div class="field-col">
+    <h5>Invoice Number : @Model.InvoiceNumber</h5>
+    <h5>Customer : @Model.CustomerName</h5>
+    <h5>Sales : @Model.SalesName</h5>
+    <h5>Order Date : @Model.OrderDate</h5>
+
+</div>
+
+<div class="field-col">
+    <h2>Delivery Information</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Shipped Date</th>
+                <th>Due Date</th>
+                <th>Destination Address</th>
+                <th>Destination City</th>
+                <th>Destination Postal Code</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @if(Model.DeliveryInfo.ShippedDate != "N/A")
+                    {
+                        <a class="btn btn-update" asp-controller="Order" asp-action="Accept" asp-route-id="@Model.InvoiceNumber"><i class="fa fa-dropbox"><span>Accept</span></i></a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-update disabled" asp-controller="Order" asp-action="Accept" asp-route-id="@Model.InvoiceNumber"><i class="fa fa-dropbox"><span>Accept</span></i></a>
+                    }
+
+                </td>
+                <td>@Model.DeliveryInfo.ShippedDate</td>
+                <td>@Model.DeliveryInfo.DueDate</td>
+                <td>@Model.DeliveryInfo.DestinationAddress</td>
+                <td>@Model.DeliveryInfo.DestinationCity</td>
+                <td>@Model.DeliveryInfo.DestinationPostalCode</td>
+                <td>@Model.DeliveryInfo.DeliveryCost</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="field-col">
+    <h2>Product Information</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Discount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ProductOrders)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.UnitPrice</td>
+                    <td>@item.Discount</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+
+</div>

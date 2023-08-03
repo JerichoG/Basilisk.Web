@@ -1,0 +1,24 @@
+﻿@using Basilisk.ViewModel.Region
+@model UpsertRegionViewModel
+@{
+    ViewData["Title"] = "Region Add-Edit";
+
+}
+
+
+<form method="POST" action="Save">
+
+    <input asp-for="Id"/>
+
+    <div class="field-row">
+        <label asp-for="City"></label>
+        <input placeholder="CityName" asp-for="City" />
+        <span asp-validation-for="City"></span>
+    </div>
+    <div class="field-row">
+        <label>Remark</label>
+        <input placeholder="Remark" asp-for="Remark" />
+    </div>    
+
+    <button type="submit" class="btn">Save</button>
+</form>

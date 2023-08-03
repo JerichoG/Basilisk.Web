@@ -1,0 +1,42 @@
+﻿@using Basilisk.ViewModel.Category;
+@model DetailCategoryViewModel
+@{
+    ViewData["Title"] = "Category Detail";
+
+}
+
+<h1> Product dari Category @Model.CategoryName</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Stock</th>
+            <th>On Order</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Supplier</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.ProductName</td>
+                <td>@item.Description</td>
+                <td>@item.Stock</td>
+                <td>@item.OnOrder</td>
+                <td>@item.Price</td>
+                <td>@item.Discontinue</td>
+                <td>@item.SupplierName</td>
+            </tr>
+
+
+        }
+    </tbody>
+    
+</table>

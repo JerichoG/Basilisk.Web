@@ -1,0 +1,29 @@
+﻿@using Basilisk.ViewModel.Shipment
+@model UpsertShipmentViewModel
+@{
+    ViewData["Title"] = "Shipment Add-Edit";
+
+}
+
+
+<form method="POST" action="Save">
+
+    <input asp-for="Id"/>
+
+    <div class="field-row">
+        <label >Company Name</label>
+        <input placeholder="CompanyName" asp-for="CompanyName" />
+       <span asp-validation-for="CompanyName"></span>
+    </div>
+    <div class="field-row">
+        <label asp-for="Phone">Phone</label>
+        <input placeholder="Phone Number" asp-for="Phone" />
+        <span asp-validation-for="Phone"></span>
+    </div>
+    <div class="field-row">
+        <label >Cost</label>
+        <input placeholder="Cost" asp-for="Cost" />
+    </div>
+
+    <button type="submit" class="btn">Save</button>
+</form>

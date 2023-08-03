@@ -1,0 +1,84 @@
+﻿@using Basilisk.ViewModel
+@*@MenuViewModel
+*@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Basilisk.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Basilisk.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/font-awesome.css" asp-append-version="true" />
+
+</head>
+@{
+    var username = (ViewBag.Username == null) ? "Anonymous" : ViewBag.Username;
+    var role = (ViewBag.Role == null) ? "Guest" : ViewBag.Role;
+    IEnumerable<MenuViewModel> listMenu = (IEnumerable<MenuViewModel>)ViewBag.Menus;
+}
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Basilisk.Web</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        @if(listMenu != null)
+                        {
+                            foreach(var menu in listMenu)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="@menu.Controller" asp-action="@menu.Action">@menu.Title</a>
+                                </li>
+                            }
+                        }
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="loginInfo">
+                <div class="userInfo">
+                    <div>@username</div>
+                    <div>@role</div>
+                </div>
+                <a asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out"></i></a>
+                @*<a id="btn-setting" class="btn-setting" href="javascript:;"><i class="fa fa-cog"></i></a>*@
+                @*<div class="setting">
+                    <a href="javascript:;"><span>Profile</span><i class="fa fa-user-circle"></i></a>
+                    <a id="btnCart" class="nav-link text-dart"></a>
+                </div>*@
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - Basilisk.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/jquery-3.5.1.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("modalDialog", required:false)
+</body>
+</html>

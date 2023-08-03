@@ -1,0 +1,67 @@
+﻿@using Basilisk.ViewModel.Region
+@model IndexRegionViewModel
+@{
+    ViewData["Title"] = "Region Index";
+
+}
+
+<form method="GET" asp-controller="Region" asp-action="Index">
+    <div class="field-row">
+        <label for="regName">Region</label>
+        <input type="text" name="searchCity" value="@Model.SearchCity" />
+
+
+    </div>
+    
+    <button type="submit" class="btn">SEARCH</button>
+
+</form>
+
+<a class="btn" id="addBtn" asp-controller="Region" asp-action="Add">ADD</a>
+
+
+<h1>Total data di table Region : @Model.TotalData  </h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>ID</th>
+            <th>City</th>
+            <th>Remark</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListRegion)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-update" asp-controller="Region" asp-action="Edit" asp-route-idRegion="@item.Id"><i class="fa fa-pencil"><span>Edit</span></i></a>
+                    <a class="btn btn-delete" asp-controller="Region" asp-action="Delete" asp-route-idRegion="@item.Id"><i class="fa fa-trash"><span>Hapus</span></i></a>
+                </td>
+                <td>@item.Id</td>
+                <td>@item.City</td>
+                <td>@item.Remark</td>
+
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">
+                <div>
+                    @for (int i = 1; i <= Model.TotalHalaman; i++)
+                    {
+
+                        <a class="btn" asp-action="Index" asp-route-page="@i"
+                       asp-route-searchCity="@Model.SearchCity">@i</a>
+
+                    }
+                </div>
+
+            </td>
+
+        </tr>
+    </tfoot>
+</table>

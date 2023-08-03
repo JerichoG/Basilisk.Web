@@ -1,0 +1,155 @@
+﻿<link rel="stylesheet" href="~/css/popup.css" asp-append-version="true" />
+
+
+    <div class="popup-dialog upsert-dialog">
+        <header>
+            <h1 style="color:white">Upsert Category</h1>
+            <a class="close-button" href="javascript">
+                <i class="fa fa-close"></i>
+            </a>
+        </header>
+
+
+    <form method="POST" class="form-add-supplier"
+        style="color: white; display:block">
+            <input class="id" hidden/>
+
+            <div class="field-row">
+                <label>Name</label>
+                <input placeholder="CategoryName" class="name" />
+            <span class="field-validation-message" data-property="Name"></span>
+            </div>
+            <div class="field-row">
+                <label>Description</label>
+                <textarea placeholder="Description" class="description"></textarea>
+                <span class="field-validation-message" data-property="Description"></span>
+            </div>
+            <div class="field-row">
+                <label>Test Dropdown</label>
+                <select id="rolesDropdown" name="rolesDropdown">
+
+                </select>
+            </div>
+            <button type="submit" class="btn">Save</button>
+        </form>
+    </div>
+
+
+
+<script>
+
+    $(document).ready(function(){
+        $.ajax({
+            method: "GET",
+            url: "/Category/GetRoles",
+            success: function(data){
+                var option = `<option value=""> -- Select Supplier --</option>`;
+
+                for(var item of data){
+                    let value = item.longValue;
+                    let text = item.stringValue;
+
+                    option += `<option value=${value}>${text}</option>`;
+                    $(`#rolesDropdown`).html(option);
+                }
+
+
+            }
+        })
+    });
+
+    $(".btn-update-modal").click(function (event) {
+        event.preventDefault();
+        let valueUrl = $(this).attr("href");
+        $.ajax({
+            url: valueUrl,
+            success: function (result) {
+                $(".upsert-dialog .id").val(result.id);
+                $(".upsert-dialog .name").val(result.name);
+                $(".upsert-dialog .description").val(result.description);
+            },
+            fail: function () { console.log("Fail") },
+            error: function () { console.log("Internal Server Error") }
+        });
+
+        $(".modal-layer").css("display", "flex");
+        $(".upsert-dialog").css("display", "block");
+
+    });
+
+  
+
+
+
+    $("#btnAddModal").click(function(event){
+        event.preventDefault();
+        $(".form-add-supplier")[0].reset();
+        $(".upsert-dialog .id").val(0);
+        
+        $(".modal-layer").css("display", "flex");
+        $(".upsert-dialog").css("display", "block");
+
+    });
+
+
+    $(".close-button").click(function (event) {
+        event.preventDefault();
+        $(".modal-layer").css("display", "none");
+        $(".upsert-dialog").css("display", "none");
+        location.reload();
+    });
+
+    $(".upsert-dialog form").submit(function(event){
+        event.preventDefault();
+        
+
+        let urlAction = "/Category/SavePopup";
+
+        var id= $(".upsert-dialog .id").val();
+        var name= $(".upsert-dialog .name").val();
+        var description = $(".upsert-dialog .description").val();
+        
+        let viewmodel = {
+            "id" : id,
+            "name" : name,
+            "description" : description
+        }
+
+        var tokenHelper = '@Html.AntiForgeryToken()';
+        var token = $(tokenHelper).val();
+
+        $.ajax({
+            method: "POST",
+            url: urlAction,
+            data: JSON.stringify(viewmodel),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            headers: {
+                "__RequestVerificationToken": token
+            },
+            success: function(result){
+               if(result.success == true){
+                   location.reload();
+               }
+               generateValidationMessage(result.validations);
+            },
+            fail: function () { console.log("Fail") },
+            error: function () { console.log("Internal Server Error") }
+        });
+
+        function generateValidationMessage(validations){
+            for(let item of validations){
+                let propertyName = item.propertyName;
+                let msg = item.messageError;
+
+
+                var elementSpanError = document.querySelector(`.upsert-dialog form [data-property=${propertyName}]`);
+                elementSpanError.textContent = msg;
+                elementSpanError.className = `field-validation-error`;
+                //$(`.upsert-dialog form[data-for=${propertyName}]`).text(msg);
+            }
+        }
+        
+    });
+
+</script>

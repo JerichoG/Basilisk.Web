@@ -1,0 +1,25 @@
+﻿@using Basilisk.ViewModel.Category
+@model CreateUpdateViewModel
+@{
+    ViewData["Title"] = "Category Add-Edit";
+
+}
+
+
+<form method="POST" asp-action="Save" class="Save">
+
+    <input asp-for="Id" />
+
+    <div class="field-row">
+        <label asp-for="Name"></label>
+        <input placeholder="CategoryName" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="field-row">
+        <label>Description</label>
+        <textarea placeholder="Description" asp-for="Description" ></textarea>
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <button type="submit" class="btn">Save</button>
+</form>

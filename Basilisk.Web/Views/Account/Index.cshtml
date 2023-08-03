@@ -1,0 +1,51 @@
+﻿@using Basilisk.ViewModel.Account
+@model IndexAccountViewModel
+@{
+    ViewData["Title"] = "Account Index";
+
+}
+
+<h1>Total data di table Account : @Model.TotalData </h1>
+
+
+<a class="btn" id="addBtn" asp-controller="Account" asp-action="Add">ADD</a>
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>Name</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Accounts)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-update" asp-controller="Account" asp-action="Edit" asp-route-id="@item.Username"><i class="fa fa-pencil"><span>Edit</span></i></a>
+                    <a class="btn btn-delete" asp-controller="Account" asp-action="Delete" asp-route-id="@item.Username"><i class="fa fa-trash"><span>Hapus</span></i></a>
+                    <a class="btn btn-detail" asp-controller="Account" asp-action="Detail" asp-route-id="@item.Username"><i class="fa fa-trash"><span>Detail</span></i></a>
+                </td>
+                <td>@item.Username</td>
+                <td>@item.Role</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="10">
+                <div>
+                    @for (int i = 1; i <= Model.TotalHalaman; i++)
+                    {
+
+                        <a class="btn" asp-action="Index" asp-route-page="@i"
+                       >@i</a>
+
+                    }
+                </div>
+
+            </td>
+
+        </tr>
+    </tfoot>
+</table>

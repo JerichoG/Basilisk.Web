@@ -1,0 +1,113 @@
+﻿<link rel="stylesheet" href="~/css/popup.css" asp-append-version="true" />
+
+
+    <div class="popup-dialog upsert-dialog">
+        <header>
+            <h1 style="color:white">Upsert Category</h1>
+            <a class="close-button" href="javascript">
+                <i class="fa fa-close"></i>
+            </a>
+        </header>
+
+
+        <form method="POST" 
+        style="color: white; display:block">
+            <input class="id" hidden/>
+
+            <div class="field-row">
+                <label>Name</label>
+                <input placeholder="CategoryName" class="name" />
+            </div>
+            <div class="field-row">
+                <label>Description</label>
+                <textarea placeholder="Description" class="description"></textarea>
+                @*<span asp-validation-for="Description"></span>*@
+            </div>
+
+            <button type="submit" class="btn">Save</button>
+        </form>
+    </div>
+
+
+
+<script>
+    $(".btn-update-modal").click(function (event) {
+        event.preventDefault();
+        let valueUrl = $(this).attr("href");
+        $.ajax({
+            url: valueUrl,
+            success: function (result) {
+                $(".upsert-dialog .id").val(result.id);
+                $(".upsert-dialog .name").val(result.name);
+                $(".upsert-dialog .description").val(result.description);
+            },
+            fail: function () { console.log("Fail") },
+            error: function () { console.log("Internal Server Error") }
+        });
+
+        $(".modal-layer").css("display", "flex");
+        $(".upsert-dialog").css("display", "block");
+
+    });
+
+  
+
+
+
+    $("#btnAddModal").click(function(event){
+        event.preventDefault();
+        $(".upsert-dialog .id").val(0);
+        $(".upsert-dialog .name").val(null);
+        $(".upsert-dialog .description").val(null);
+        $(".modal-layer").css("display", "flex");
+        $(".upsert-dialog").css("display", "block");
+
+    });
+
+
+    $(".close-button").click(function (event) {
+        event.preventDefault();
+        $(".modal-layer").css("display", "none");
+        $(".upsert-dialog").css("display", "none");
+    });
+
+    $(".upsert-dialog form").submit(function(event){
+        event.preventDefault();
+        
+
+        let urlAction = "/Category/SavePopup";
+
+        var id= $(".upsert-dialog .id").val();
+        var name= $(".upsert-dialog .name").val();
+        var description = $(".upsert-dialog .description").val();
+        
+        let viewmodel = {
+            "id" : id,
+            "name" : name,
+            "description" : description
+        }
+
+        var tokenHelper = '@Html.AntiForgeryToken()';
+        var token = $(tokenHelper).val();
+
+        $.ajax({
+            method: "POST",
+            url: urlAction,
+            data: JSON.stringify(viewmodel),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            headers: {
+                "__RequestVerificationToken": token
+            },
+            success: function(result){
+               if(result.success == true){
+                   location.reload();
+               }
+            },
+            fail: function () { console.log("Fail") },
+            error: function () { console.log("Internal Server Error") }
+        });
+        
+    });
+
+</script>

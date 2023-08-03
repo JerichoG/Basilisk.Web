@@ -1,0 +1,73 @@
+﻿@using Basilisk.ViewModel.Salesman
+@model AddEditSalesmanViewModel
+@{
+    ViewData["Title"] = "Salesman Add";
+
+}
+
+<form method="POST" asp-action="Add" class="Save">
+
+    <div class="field-row">
+        <label>Employee Number</label>
+        <input placeholder="EmployeeNumber" asp-for="EmployeeNumber" />
+        <span asp-validation-for="EmployeeNumber"></span>
+    </div>
+
+    <div class="field-row">
+        <label>FirstName</label>
+        <input placeholder="FirstName" asp-for="FirstName" />
+        <span asp-validation-for="FirstName"></span>
+    </div>
+
+    <div class="field-row">
+        <label>LastName</label>
+        <input placeholder="LastName" asp-for="LastName" />
+        <span asp-validation-for="LastName"></span>
+    </div>
+
+    <div class="field-row">
+        <label>Level</label>
+        <input placeholder="Level" asp-for="Level" />
+        <span asp-validation-for="Level"></span>
+    </div>
+
+    <div class="field-row">
+        <label>BirthDate</label>
+        <input type="date" placeholder="BirthDate" asp-for="@Model.BirthDate" />
+        <span asp-validation-for="BirthDate"></span>
+    </div>
+
+    <div class="field-row">
+        <label>HireDate</label>
+        <input type="date" placeholder="HireDate" asp-for="@Model.HiredDate" />
+        <span asp-validation-for="HiredDate"></span>
+    </div>
+
+    <div class="field-row">
+        <label>Address</label>
+        <textarea placeholder="Address" asp-for="Address"></textarea>
+    </div>
+    <div class="field-row">
+        <label>City</label>
+        <input placeholder="City" asp-for="City" />
+    </div>
+
+    <div class="field-row">
+        <label>Phone</label>
+        <input placeholder="Phone" asp-for="Phone" />
+        <span asp-validation-for="Phone"></span>
+    </div>
+
+    <div class="field-row">
+        <label>Superior</label>
+        <select asp-for="SuperiorEmployeeNumber" asp-items="Model.DropdownSuperiorEmp">
+            <option selected>-- Select Superior --</option>
+        </select>
+        <span asp-validation-for="SuperiorEmployeeNumber"></span>
+    </div>
+
+    @*
+    <input asp-for="DropdownSuperiorEmployee" style="display:none;"/>*@
+
+    <button type="submit" class="btn">Save</button>
+</form>

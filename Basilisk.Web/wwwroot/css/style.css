@@ -1,0 +1,243 @@
+#targetForm{
+    margin: 20px;
+    /* background-color: rgb(23, 13, 161); */
+}
+
+.grid-container{
+    background-color: blueviolet;
+}
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+    background-color: grey;
+}
+
+table {
+    width: 100%;
+    /* margin: 10px; */
+    overflow: hidden;
+    border-collapse: collapse;
+    border-radius: 10px;
+}
+
+.cardCart {
+    background-color: sandybrown;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.wrap-contentCart {
+    display: flex;
+    justify-content: space-between;
+    width: "100px";
+}
+
+.checkOut {
+    background-color: cadetblue;
+    height: 250px;
+}
+
+th, td {
+    padding: 5px;
+    width: max-content;
+}
+
+td{
+    padding: 5px;
+    text-align: center;
+
+}
+
+th {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    padding-top: 12px;
+    padding-right: 12px;
+}
+
+thead > tr > th:first-child{
+        width: 200px;
+}
+
+tbody > tr:nth-child(odd) {
+    background-color: grey;
+}
+
+
+tbody > tr:nth-child(even) {
+    background-color: #c5c5c5;
+}
+
+.btn
+{
+    display: inline-block;
+    height: 30px;
+    padding: 0px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 3px;
+    line-height: 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: #709cc0;
+}
+
+.btn-save{
+    background-color: #258841;
+    color: white
+}
+
+.btn-detail {
+
+    color: white
+}
+
+.btn-checkout {
+    background-color: orangered
+}
+
+.btn-update{
+    background-color: #ffa500;
+    color: white
+}
+
+.btn-delete,
+.btn-cancel{
+    background: linear-gradient(to right, #f81421, #fa1414);
+    color: white
+}
+
+.btn > i > span{
+    margin-left: 6px;
+}
+
+form {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form[action="Add"], form[action="Edit"], form[action="Save"], .Save {
+        flex-direction: column;
+}
+
+
+input[id="Id"]{
+    display: none;
+}
+
+.field-row{
+    margin: 20px 0;
+    padding: 10px;
+    /* background-color: blue; */
+    width: max-content;
+    display: flex;
+    justify-content: space-between;
+}
+
+.field-col {
+    margin: 20px 0;
+    padding: 10px;
+    /* background-color: blue; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.field-row div{
+    display: flex;
+    flex-direction: column;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    justify-content: space-between;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea
+{
+    width: 200px;
+}
+
+
+
+textarea{
+    resize: none;
+}
+
+.replace-checkbox{
+    width: 20px;
+    height: 20px;
+    border: solid black 1px;
+    display: inline-block;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+[name="hobi"]:checked + .replace-checkbox{
+    background-color: black;
+}
+
+.title-form{
+    display: flex;
+    align-items: center;
+}
+
+.title-form > img{
+    width: 35px;
+    height: 35px;
+    margin-right: 10px; 
+}
+
+.tr{
+    display: none;
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.cart-product {
+    display: flex;
+    flex-direction: row;
+}
+
+.product-image {
+    display: flex;
+    flex-direction: row;
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+}
+
+.form-cart {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 200px;
+    background-color: white;
+    margin: 20px;
+    border: solid grey 0.5px;
+    border-radius: 20px;
+    padding: 10px
+}
+

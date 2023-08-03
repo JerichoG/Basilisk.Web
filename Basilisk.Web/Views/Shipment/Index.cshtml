@@ -1,0 +1,71 @@
+﻿@using Basilisk.ViewModel.Shipment
+@model IndexShipmentViewModel
+@{
+    ViewData["Title"] = "Delivery Index";
+
+}
+
+<form method="GET" asp-controller="Shipment" asp-action="Index">
+    <div class="field-row">
+        <label for="ShipName">Delivery</label>
+        <input type="text" name="searchShip" value="@Model.SearchShipper" />
+
+
+    </div>
+
+    <button type="submit" class="btn">SEARCH</button>
+
+</form>
+
+<a class="btn" id="addBtn" asp-controller="Shipment" asp-action="Add">ADD</a>
+
+
+<h1>Total data di table Delivery : @Model.TotalData  </h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>ID</th>
+            <th>Company Name</th>
+            <th>Phone</th>
+            <th>Cost</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Shipments)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-update" asp-controller="Shipment" asp-action="Edit" asp-route-idShip="@item.ShipId"><i class="fa fa-pencil"><span>Edit</span></i></a>
+                    <a class="btn btn-delete" asp-controller="Shipment" asp-action="Delete" asp-route-idShip="@item.ShipId"><i class="fa fa-trash"><span>Hapus</span></i></a>
+                    <a class="btn btn-detail" asp-controller="Shipment" asp-action="Detail" asp-route-idShip="@item.ShipId"><i class="fa fa-info-circle"><span>Detail</span></i></a>
+                </td>
+                <td>@item.ShipId</td>
+                <td>@item.ShipName</td>
+                <td>@item.Phone</td>
+                <td>@item.Cost</td>
+
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">
+                <div>
+                    @for (int i = 1; i <= Model.TotalHalaman; i++)
+                    {
+
+                        <a class="btn" asp-action="Index" asp-route-page="@i"
+                       asp-route-searchCity="@Model.SearchShipper">@i</a>
+
+                    }
+                </div>
+
+            </td>
+
+        </tr>
+    </tfoot>
+</table>
+
