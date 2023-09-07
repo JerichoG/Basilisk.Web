@@ -84,7 +84,7 @@ namespace Basilisk.Provider
         {
             var products = (from a in ProductRepository.GetRepository().GetAll()
                             where a.CategoryId == id
-                            select new 
+                            select new GridProductViewModel
                             {
                                 Id = a.Id,
                                 ProductName = a.Name,
