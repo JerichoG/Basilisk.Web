@@ -34,22 +34,22 @@ namespace Basilisk.Api.Controllers
         }
 
         [HttpPost]
-        public string Insert(CreateUpdateViewModel model)
+        public IActionResult Insert(CreateUpdateViewModel model)
         {
             if(ModelState.IsValid)
             {
                 try
                 {
                     CategoryProvider.GetProvider().SaveData(model);
-                    return "Berhasil Tambah Data";
+                    return Ok("Berhasil Tambah Data");
                 }
                 catch(Exception)
                 {
-                    return "Gagal Tambah Data";
+                    return Ok("Gagal Tambah Data");
                 }
 
             }
-            return "Gagal Insert Data";
+            return Ok("Gagal Insert Data");
         }
 
         [HttpPut]
